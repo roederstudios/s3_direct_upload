@@ -105,6 +105,7 @@ $.fn.S3Uploader = (options) ->
 
       fail: (e, data) ->
         content = build_content_object $uploadForm, data.files[0], data.result
+        content.error_code = $(data.jqXHR.responseXML).find("Code").text()
         content.error_thrown = data.errorThrown
 
         data.context.remove() if data.context && settings.remove_failed_progress_bar # remove progress bar
